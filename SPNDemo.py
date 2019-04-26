@@ -60,5 +60,5 @@ print(S.map([rv2], [1]))
 
 # save_spn('spn', S)
 
-# S, rvs = load_spn('spn')
-# print(S.prob(rvs, data))
+# S, [rv1, rv2] = load_spn('spn')
+# print(S.prob([rv1, rv2], data))
