@@ -194,8 +194,8 @@ class SPN:
                     s_g[j] = s_g.get(j, 0) + n.w[idx] * s_g[n]
                     w_g[idx] = np.average(s_g[n] * j.value)
                 tau_g = n.w * (w_g - np.sum(w_g * n.w))
-                n.tau += tau_g * step_size
-                n.w = self.softmax(n.tau)
+                tau = np.log(n.w) + tau_g * step_size
+                n.w = self.softmax(tau)
 
             elif isinstance(n, ProductNode):
                 for j in n.ch:
@@ -208,8 +208,8 @@ class SPN:
     def init_weight(self):
         for n in self.nodes:
             if isinstance(n, SumNode):
-                n.tau = np.random.rand(len(n.ch))
-                n.w = self.softmax(n.tau)
+                tau = np.random.rand(len(n.ch))
+                n.w = self.softmax(tau)
 
     def train(self, data, iterations=100, step_size=1):
         self.init_weight()

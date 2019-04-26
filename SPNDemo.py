@@ -1,5 +1,6 @@
 from SumProductNets import *
 import numpy as np
+from utils import *
 
 
 # each column is a data point
@@ -39,7 +40,7 @@ print(S.prob([rv1], data[[0], :]))
 print(S.prob([rv1, rv2], [0, 1]))
 
 # training
-S.train(data, iterations=1000, step_size=5)
+S.train(data, iterations=1000, step_size=1)
 
 # batch training
 # S.init_weight()
@@ -56,3 +57,8 @@ print(S.prob([rv1, rv2], data))
 print(S.map([], []))
 print(S.map([rv1], [0]))
 print(S.map([rv2], [1]))
+
+# save_spn('spn', S)
+
+# S, rvs = load_spn('spn')
+# print(S.prob(rvs, data))
